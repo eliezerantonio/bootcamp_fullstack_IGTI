@@ -42,8 +42,6 @@ function activateInput() {
 
             render()
         }
-
-
     }
 }
 
