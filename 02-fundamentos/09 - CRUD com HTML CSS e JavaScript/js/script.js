@@ -2,6 +2,8 @@ window.addEventListener('load', start); // esperando o html ser carregado
 
 var globalNames = ['Eliezer'];
 var inputName = null;
+var isEditing = false;
+var currentIndex = null;
 
 function start() {
     inputName = document.querySelector('#inputName'); //acessando o elemento a manipular
@@ -34,13 +36,23 @@ function activateInput() {
         console.log(event);
 
         if (event.key === 'Enter') {
-            insertName(event.target.value) //pasando o valor capiturado no metodo insertName
+            if (isEditing) {
+                updateName(event.target.value);
+            } else {
+                insertName(event.target.value); //pasando o valor capiturado no metodo insertName
+            }
+            isEditing = false;
+            clearInput();
+            render();
         }
 
         function insertName(newName) { //metodo para insetir nome no array
             globalNames.push(newName);
 
-            render()
+        }
+
+        function updateName(newName) {
+            globalNames[currentIndex] = newName
         }
     }
 }
@@ -63,8 +75,7 @@ function render() {
 
         var li = document.createElement('li');
 
-        var span = document.createElement('span')
-        span.textContent = currentName;
+        var span = createSpan(currentName, i);
         var button = createDeleteButton();
 
 
@@ -87,6 +98,22 @@ function render() {
             return button;
         }
     }
+
+    function createSpan(name, index) {
+
+        function editItem() {
+            inputName.value = name
+            inputName.focus()
+            isEditing = true;
+            currentIndex = index
+        }
+        var span = document.createElement('span')
+        span.classList.add('clickable')
+        span.textContent = name;
+        span.addEventListener('click', editItem)
+        return span;
+    }
+
 
     divNames.appendChild(ul);
     clearInput()
