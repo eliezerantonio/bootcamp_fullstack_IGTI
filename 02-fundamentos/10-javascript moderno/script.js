@@ -57,6 +57,6 @@ const name = 'Eliezer'
 const surname = 'Antonio';
 const text1 = `eu sou o ${name} ${surName}`
 
-//defualt parameters
+//defualt parameters , por parao funciona so no segundo paramentro
 
 const sum5 = (a, b = 1 = 0) => a + b;
