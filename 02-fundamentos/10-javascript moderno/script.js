@@ -56,3 +56,7 @@ const sum4 = (a, b) => a + b;
 const name = 'Eliezer'
 const surname = 'Antonio';
 const text1 = `eu sou o ${name} ${surName}`
+
+//defualt parameters
+
+const sum5 = (a, b = 1 = 0) => a + b;
