@@ -5,6 +5,7 @@ var inputName = null;
 var isEditing = false;
 var currentIndex = null;
 
+
 function start() {
     inputName = document.querySelector('#inputName'); //acessando o elemento a manipular
     preventFormSubmit(); //reomver o submit do form 
@@ -33,7 +34,11 @@ function activateInput() {
 
     //fazer alguma coisa quando o caracter for enter
     function handleTyping(event) {
-        console.log(event);
+        var hasText = !!event.target.value && event.target.value.trim() !== '';
+        if (!hasText) {
+            clearInput()
+            return;
+        }
 
         if (event.key === 'Enter') {
             if (isEditing) {
